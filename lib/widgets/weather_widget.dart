@@ -15,7 +15,7 @@ class WeatherWidget extends StatelessWidget {
           child: Column(
             children: [
               Text(
-                weatherInfo.weatherCondition,
+                '${weatherInfo.weatherCondition } in ${weatherInfo.loc.name}',
                 style: TextStyle(fontSize: 30, fontWeight: FontWeight.w400),
               ),
               Text(

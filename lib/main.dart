@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import './homescreen.dart';
+import 'package:provider/provider.dart';
+import 'package:weather_mainor_2023/controllers/in_memory_history_controller.dart';
+import 'package:weather_mainor_2023/screens/weather_history_screen.dart';
+import 'screens/homescreen.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(ChangeNotifierProvider(create: (context) => InMemoryHistoryController(),
+  child: const MyApp()));
 }
 
 class MyApp extends StatelessWidget {
@@ -11,12 +15,15 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Best Weather App',
+      routes: {
+        '/': (context) => HomeScreen(),
+        '/history': (context) => WeatherHistoryScreen(),
+      },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: HomeScreen(),
     );
   }
 }

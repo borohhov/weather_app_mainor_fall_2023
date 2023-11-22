@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_mainor_2023/controllers/in_memory_history_controller.dart';
+import 'package:weather_mainor_2023/providers/history_provider.dart';
 import 'package:weather_mainor_2023/entities/location.dart';
 import 'package:weather_mainor_2023/entities/weather_history.dart';
 import 'package:weather_mainor_2023/entities/weather_info.dart';
@@ -48,7 +48,7 @@ class HomeScreenState extends State<HomeScreen> {
                         snapshot.data != null) {
                       WidgetsBinding.instance.addPostFrameCallback((_) {
                         WeatherHistory history = WeatherHistory(snapshot.data!, DateTime.now());
-                        Provider.of<InMemoryHistoryController>(context, listen: false).saveRecord(history);
+                        Provider.of<HistoryProvider>(context, listen: false).saveRecord(history);
                       });
                       return ListView(
                         children: [

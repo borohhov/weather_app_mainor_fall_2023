@@ -10,6 +10,27 @@ class WeatherInfo {
 
   WeatherInfo(this.loc, this.weatherCondition, this.temperature, this.rainChance, this.minDailyTemp,this.maxDailyTemp);
 
+  Map<String, dynamic> toMap() {
+    return {
+      'location': loc.toMap(),
+      'weatherCondition': weatherCondition,
+      'temperature': temperature,
+      'rainChance': rainChance,
+      'minDailyTemp': minDailyTemp,
+      'maxDailyTemp': maxDailyTemp,
+    };
+  }
+
+  static WeatherInfo fromMap(Map<String, dynamic> map) {
+    return WeatherInfo(
+      GeoLocation.fromMap(map['location']),
+      map['weatherCondition'],
+      map['temperature'],
+      map['rainChance'],
+      map['minDailyTemp'],
+      map['maxDailyTemp'],
+    );
+  }
 }
 
 Map<int, String> weatherCodeDescriptions = {

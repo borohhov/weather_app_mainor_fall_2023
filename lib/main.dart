@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_mainor_2023/controllers/in_memory_history_controller.dart';
+import 'package:weather_mainor_2023/providers/history_provider.dart';
 import 'package:weather_mainor_2023/screens/weather_history_screen.dart';
 import 'screens/homescreen.dart';
 
 void main() {
-  runApp(ChangeNotifierProvider(create: (context) => InMemoryHistoryController(),
+  WidgetsFlutterBinding.ensureInitialized();
+  runApp(ChangeNotifierProvider(create: (context) => HistoryProvider(),
   child: const MyApp()));
 }
 

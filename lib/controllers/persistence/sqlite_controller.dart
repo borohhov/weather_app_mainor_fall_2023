@@ -33,10 +33,39 @@ class SQLiteController implements HistoryController {
   @override
   Future<void> saveRecord(WeatherHistory history) async {
     await init();
-    await database.insert(
-      'WeatherHistory',
-      history.toMap(),
+    // Extract location data
+    final locationData = history.weatherInfo.loc;
+    final weatherInfo = history.weatherInfo; // Assuming other keys are for WeatherInfo
+
+    // First, insert the location data
+    int locationId = await database.insert(
+      'GeoLocation',
+      {
+        'name': locationData.name,
+        'latitude': locationData.lat,
+        'longitude': locationData.long,
+      },
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
+
+    // Then, insert the weather data with the location ID
+    int weatherInfoId = await database.insert(
+      'WeatherInfo',
+      {
+        'location_id': locationId,
+        'weatherCondition': weatherInfo.weatherCondition,
+        'temperature': weatherInfo.temperature,
+        'rainChance': weatherInfo.rainChance,
+        'minDailyTemp': weatherInfo.minDailyTemp,
+        'maxDailyTemp': weatherInfo.maxDailyTemp,
+      },
+      conflictAlgorithm: ConflictAlgorithm.replace,
+    );
+
+    await database.insert('WeatherHistory', {
+      'weatherInfo_id': weatherInfoId,
+      'timestamp': history.timestamp
+    });
   }
 }
+

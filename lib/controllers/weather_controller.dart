@@ -1,7 +1,7 @@
 import 'package:weather_mainor_2023/entities/location.dart';
 
 import '../entities/weather_info.dart';
-import '../services/open_weather_api.dart';
+import '../services/weather_backend_calls.dart';
 class WeatherController{
 
   Future<WeatherInfo?> getWeatherInfo(GeoLocation location){

@@ -5,14 +5,10 @@ import 'dart:convert';
 import '../entities/weather_info.dart';
 
 Future<WeatherInfo?> fetchWeatherData(GeoLocation location) async {
-  var url = Uri.parse('https://api.open-meteo.com/v1/forecast')
+  var url = Uri.parse('https://us-central1-mainor-2023-autumn-weather-app.cloudfunctions.net/fetchWeatherData')
       .replace(queryParameters: {
     'latitude': location.lat.toString(),
     'longitude': location.long.toString(),
-    'hourly': 'temperature_2m,precipitation,weather_code',
-    'daily': 'temperature_2m_max,temperature_2m_min,precipitation_probability_max',
-    'timezone': 'auto',
-    'forecast_days': '1',
   });
 
   try {
